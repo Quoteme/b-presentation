@@ -1,0 +1,172 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>The state of B/Event-B tooling</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic"
+      rel="stylesheet"
+    />
+
+    <link href="css/impress-demo.css" rel="stylesheet" />
+    <link href="css/impress-common.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" href="assets/icon.png" />
+  </head>
+
+  <body class="impress-not-supported">
+    <div class="fallback-message">
+      <p>
+        Your browser <b>doesn't support the features required</b> by impress.js,
+        so you are presented with a simplified version of this presentation.
+      </p>
+      <p>
+        For the best experience please use the latest <b>Chrome</b>,
+        <b>Safari</b> or <b>Firefox</b> browser.
+      </p>
+    </div>
+
+    <div
+      id="impress"
+      data-transition-duration="1000"
+      data-width="1024"
+      data-height="768"
+      data-max-scale="3"
+      data-min-scale="0"
+      data-perspective="1000"
+    >
+      <div id="rodin" class="step tool" data-x="0" data-y="0" data-z="0">
+        <h1>using Rodin</h1>
+        <img
+          class="shot"
+          src="./assets/the-rodin-experience.png"
+          alt="Rodin showing an unhandled event loop exception: Java heap space"
+        />
+        <p class="links">
+          Nix support:
+          <a href="https://github.com/quoteme/rodin" target="_blank"
+            >https://github.com/quoteme/rodin</a
+          >
+        </p>
+      </div>
+
+      <div
+        id="bnvim"
+        class="step tool"
+        data-x="1000"
+        data-y="0"
+        data-z="-1000"
+        data-rotate-y="90"
+      >
+        <h1>b.nvim</h1>
+        <video
+          id="bnvim-video"
+          src="./assets/bnvim.mp4"
+          muted
+          loop
+          playsinline
+          controls
+          preload="auto"
+        ></video>
+        <p class="links">
+          <a href="https://github.com/quoteme/b.nvim" target="_blank"
+            >https://github.com/quoteme/b.nvim</a
+          >
+        </p>
+      </div>
+
+      <div
+        id="b-language-server"
+        class="step tool split"
+        data-x="0"
+        data-y="0"
+        data-z="-2000"
+        data-rotate-y="180"
+      >
+        <img
+          class="shot"
+          src="./assets/b-language-server-sequence.png"
+          alt="Sequence diagram of the b-language-server: editor client, server, analysis dispatcher and ProB session"
+        />
+        <div>
+          <h1>the (heavily modified) <span class="nowrap">b-language-server</span></h1>
+          <p class="links">
+            <a href="https://lucah.tech/b-language-server/" target="_blank"
+              >https://lucah.tech/<wbr /><span class="nowrap">b-language-server/</span></a
+            >
+            <a href="https://github.com/quoteme/b-language-server" target="_blank"
+              >https://github.com/quoteme/<wbr /><span class="nowrap">b-language-server</span></a
+            >
+          </p>
+        </div>
+      </div>
+
+      <div
+        id="b-vscode"
+        class="step tool"
+        data-x="-1000"
+        data-y="0"
+        data-z="-1000"
+        data-rotate-y="270"
+      >
+        <h1>b.vscode</h1>
+        <img
+          class="shot"
+          src="./assets/b-vscode.png"
+          alt="Editor with an Event-B context, a hover over a constant and the ProB animation panel"
+        />
+        <p class="links">
+          <a href="https://github.com/Quoteme/b.vscode" target="_blank"
+            >https://github.com/Quoteme/b.vscode</a
+          >
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=Happel.prob-language-extension"
+            target="_blank"
+            >https://marketplace.visualstudio.com/items?itemName=Happel.prob-language-extension</a
+          >
+          <a
+            class="badge"
+            href="https://marketplace.visualstudio.com/items?itemName=Happel.prob-language-extension"
+            target="_blank"
+            ><img
+              src="./assets/marketplace-badge.svg"
+              alt="Download on VS Code Marketplace"
+          /></a>
+        </p>
+      </div>
+    </div>
+
+    <div id="impress-toolbar"></div>
+
+    <div class="hint">
+      <p>
+        Use a spacebar or arrow keys to navigate. <br />
+        Press 'P' to launch speaker console.
+      </p>
+    </div>
+    <script>
+      if ("ontouchstart" in document.documentElement) {
+        document.querySelector(".hint").innerHTML =
+          "<p>Swipe left or right to navigate</p>";
+      }
+    </script>
+
+    <script src="js/impress.js"></script>
+    <script>
+      impress().init();
+
+      // Play the b.nvim video only while its slide is showing.
+      const video = document.getElementById("bnvim-video");
+      document.addEventListener("impress:stepenter", (event) => {
+        if (event.target.id === "bnvim") video.play();
+      });
+      document.addEventListener("impress:stepleave", (event) => {
+        if (event.target.id === "bnvim") video.pause();
+      });
+    </script>
+  </body>
+</html>
